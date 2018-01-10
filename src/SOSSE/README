@@ -1,0 +1,20 @@
+SOSSE is documented inside the source. Printable/browsable documentation
+is generated with doxygen. A "make" in the top level directory will
+also build the documentation. If you do not have doxygen installed and
+do not want to install it, you find the most important documentation in
+"src/main.h". You can also browse it online at:
+
+<http://www.mbsks.franken.de/sosse/>
+
+**UPDATED**
+
+While researching smart card technology I came across this great
+environment (SOSSE) and realized it needed some cleaning and updating,
+since the last release was back in 2003. Now, in 2012, I made some
+changes and I'm putting up on GitHub so we can continue updating and
+making it great! 
+
+Email me with any questions: <q@crypto.com>
+
+Check out TODO in rootdir for list of modifications made to 2003 release
+and for future updates.

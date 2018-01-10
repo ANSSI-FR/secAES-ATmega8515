@@ -1,0 +1,50 @@
+; Little endian file system and admin key!
+
+#include <config.h>
+
+	.text
+; CARD_STATE_ADDR
+	.byte	0x00
+; ATR_LEN_ADDR
+	.byte	0x10
+; ATR_ADDR
+	; TS:		3B	- direct convention
+	; T0:		BA	- TA1/TB1/TD1 follows,  historical bytes
+	; TA1:		11	- FI: 0x1 (F: 372), DI: 01 (D: 1)
+	; TB1:		00	- no Vpp
+	; TD1:		40	- TC2 follows
+	; TC2:		0A	- WI (1 second)
+	; T1-T5:	53 4F 53 53 45	- "SOSSE"
+	; T6-T8:	02 03 25	- BCD coded date
+	; T9:		02	- Chip type
+	;				  00: AT90S2323, AT90S2343
+	;				  01: AT90S8515, AT90S8535
+	;				  02: ATmega161
+	;				  10: 16F84
+	;				  11: 16F876
+	;				  FF: unspec.
+	; T10:		03	- External EEPROM size
+	;				  00: none
+	;				  01: 16k bit
+	;				  02: 32k bit
+	;				  03: 64k bit
+	;				  04: 128k bit
+	;				  05: 256k bit
+	;				  FF: unspec.
+	.byte	0x3B, 0xBA, 0x11, 0x00, 0x40, 0x20, 0x53, 0x4F
+	.byte	0x53, 0x53, 0x45, YEAR, MONTH, DAY, CHIP, ESIZ 
+	.byte	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+	.byte	0x00, 0x00, 0x00, 0x00
+; SERNUM_ADDR
+	.byte	0x01, 0x23, 0x45, 0x67, 0x89, 0xAB, 0xCD, 0xEF
+; RAND_STATE_ADDR
+	; Counter
+	.byte	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+	; State
+	.byte	0xF1, 0x23, 0x45, 0x67, 0x89, 0xAB, 0xCD, 0xE0
+	; Key
+	.byte	0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18
+	.byte	0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x28
+; Empty entry
+	.byte	0x00, 0x00
+
