@@ -4,7 +4,7 @@
 
 ### Introduction
 
-The members of ANSSI's laboratoty of embedded security has developped two versions of AES128 for ATmega-8515 device. The implementation codes are published for research and pedagogical puroposes only.
+The members of ANSSI's laboratory of embedded security has developped two versions of AES128 for ATmega-8515 device. The implementation codes are published for research and pedagogical puroposes only.
 The ATmega-8515 component is not a secure one; in particular it works with an external clock and
 contains no hardware random generator. The information leakage is consequently particularly high and there
 is almost no jittering (traces' acquisition should therefore not suffer from too much desynchronisation). To
