@@ -10,7 +10,7 @@ The members of ANSSI's laboratory of embedded security has developed two version
 The implementation codes are published for research and pedagogical purposes only.
 
 The platform on which the code has been tests is the 
-[WB electronics 64 Kbit ATMega chipcard](http://www.infinityusb.com/default.asp?show=store&ProductGrp=8):
+[WB Electronics 64 Kbit ATMega chipcard](http://www.infinityusb.com/default.asp?show=store&ProductGrp=8):
 it is made of an ATMega8515 embedded in a smartcard form factor, which represents a realistic SCA attacks
 target.
 
