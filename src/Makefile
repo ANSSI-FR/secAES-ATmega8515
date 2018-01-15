@@ -52,6 +52,7 @@ sosse: $(SOSSE_OBJ)
 
 sosse_clean:
 	@rm -f $(SOSSE_DIR)/*.o
+	@rm -f $(SOSSE_DIR)/*.map
 
 ###### AESV1 ##################################################################
 # AESV1 objects compilation
