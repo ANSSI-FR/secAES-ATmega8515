@@ -1,6 +1,4 @@
-# Secure AES128 for ATmega8515
-
-
+# Secure AES128 for ATMega8515
 
 **Authors:** Ryad Benadjila, Victor Lomné, Emmanuel Prouff, Thomas Roche
 
@@ -31,4 +29,9 @@ an AES128 encryption et get the result (cf. ``testingScript/script-AES128-enc.py
 The project sources (OS + secure AES128) are provided in two different archives (one for each version,
 *low security* or *high security*) : Version1 and Version2. The sources files contain many comments which should clarify
 the choices made to secure the algorithms. The (modified/simplified) sources
-of SOSSE still contain the original comments.
+iof SOSSE still contain the original comments.
+
+## Licenses
+
+SOSSE source codes are released under GPL v2 License. Our specific source codes (for aesv1 and aesv2) are 
+released under the BSD License. See the LICENSE file in each source folder for more information. 
