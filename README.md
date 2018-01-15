@@ -32,7 +32,6 @@ the choices made to secure the algorithms. The (modified/simplified) sources
 iof SOSSE still contain the original comments.
 
 
-## Licenses
-
+## Licenses
 SOSSE source codes are released under GPL v2 License. Our specific source codes (for aesv1 and aesv2) are 
 released under the BSD License. See the LICENSE file in each source folder for more information. 
