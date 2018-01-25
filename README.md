@@ -20,6 +20,8 @@ for Version1 and improved countermeasures for Version2.
 
 ## The project
 
+### Quick Start
+
 The AES128 implementations have been embedded in a minimal OS based on the open source OS SOSSE
 (cf. www.mbsks.franken.de/sosse/). The AES128 API can therefore be executed through the ISO-7816 interface of the card
 (implemented in software by the SOSSE OS HAL). The list of available APDUs and their basic description are given in 
@@ -31,6 +33,12 @@ The project sources (OS + secure AES128) are provided in two different archives 
 the choices made to secure the algorithms. The (modified/simplified) sources
 iof SOSSE still contain the original comments.
 
+### Cautionary Notes 
+
+For efficiency reasons, the assembly code of AES Version1 assumes that the global variable ``maskedSbox`` has an address correctly aligned on 
+a memory block of 256 bytes. Another table ``zeroValue`` is used and adapted for such a purpose. If the compilation is done with **avr-gcc 5.4**, 
+the correct alignment can be forced by replacing the declaration of ``maskedSbox`` in file ``aesTables.h`` by:
+    UCHARnmaskedSbox [AESCARDGF256] __attribute__((aligned(256)));
 
 ## Licenses
 SOSSE source codes are released under GPL v2 License. Our specific source codes (for aesv1 and aesv2) are 
