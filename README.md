@@ -38,6 +38,7 @@ iof SOSSE still contain the original comments.
 For efficiency reasons, the assembly code of AES Version1 assumes that the global variable ``maskedSbox`` has an address correctly aligned on 
 a memory block of 256 bytes. Another table ``zeroValue`` is used and adapted for such a purpose. If the compilation is done with **avr-gcc 5.4**, 
 the correct alignment can be forced by replacing the declaration of ``maskedSbox`` in file ``aesTables.h`` by:
+
     UCHARnmaskedSbox [AESCARDGF256] __attribute__((aligned(256)));
 
 ## Licenses
