@@ -39,7 +39,7 @@ For efficiency reasons, the assembly code of AES Version1 assumes that the globa
 a memory block of 256 bytes. Another table ``zeroValue`` is used and adapted for such a purpose. If the compilation is done with **avr-gcc 5.4**, 
 the correct alignment can be forced by replacing the declaration of ``maskedSbox`` in file ``aesTables.h`` by:
 
-    UCHARnmaskedSbox [AESCARDGF256] __attribute__((aligned(256)));
+    UCHAR maskedSbox [AESCARDGF256] __attribute__((aligned(256)));
 
 ## Licenses
 SOSSE source codes are released under GPL v2 License. Our specific source codes (for aesv1 and aesv2) are 
