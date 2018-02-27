@@ -725,6 +725,7 @@ LDI  r29, hi8(permIndices)
 LDI  r30, lo8(permIndicesSR)
 LDI  r31, hi8(permIndicesSR)
 
+CLR  r0              ; Clear r0 since it will be used in ADC later and we don't know its initial value
 
 ;i = 15
 LDD  r18, Y + 15     ; r18 = permIndices(i) = random index
