@@ -106,10 +106,10 @@ int main( void )
 				cmd_get_output();
 				break;
 			default:
-				t0_sendWord( SW_WRONG_INS );
+				sw_set( SW_WRONG_INS );
 			}
 		} else {
-			t0_sendWord( SW_WRONG_CLA );
+			sw_set( SW_WRONG_CLA );
 		}
 
 #if CONF_WITH_TRNG==1
