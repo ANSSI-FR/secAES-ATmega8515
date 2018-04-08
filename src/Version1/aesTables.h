@@ -23,15 +23,12 @@ UCHAR mask         [AESMaskSize];
 UCHAR masksState   [AESStateSize];
 UCHAR keyState     [AESStateSize];
 
+// 
+UCHAR zeroValue        [29];
 // Global variable to store the re-computed table in RAM 
-// NOTE: the alignment property is used as an hyptohesis in the AES assembly
-// directive
-// FIXME: some versions of avr-gcc seem to ignore this alignment attribute, yielding in
-// a bad behaviour of the code. A proper way of dealing with this would be to throw a
-// known error (with a specific APDU) if the program detects that the maskedSbox table is
-// not aligned, or deal programmatically with this issue through a dynamic pointer adjustment
-// before the AES is called.
-__attribute__((aligned(256))) UCHAR maskedSbox       [AESCARDGF256];
+// Hypothesis: this table is aligned on 256 bytes (i.e. LSB of address is 0x00)
+// TODO: adjust the zeroValue size above to control the adjustment!
+UCHAR maskedSbox       [AESCARDGF256];
 // Global variable to store the indices of the permutation table used to shuffle the processing
 UCHAR permIndices      [AESStateSize];
 // Global variable to store the indices of the permutation table used to shuffle the processing 

@@ -41,9 +41,9 @@
 ;*    - unsigned char masksState       [16];
 ;*    - unsigned char keyState         [16];
 ;*      
-;*    - unsigned char zeroValue        [37];   //needed for storing the 
-;*                                             //maskedSbox Table at an 
-;*                                             //address with lsb null.
+;*    - unsigned char zeroValue        [XX];   //needed for padding the
+;*                                             //maskedSbox Table at an
+;*                                             //address with lsb null
 ;*    - unsigned char maskedSbox       [256];  //recomputed s-box
 ;*    - unsigned char permIndices      [16];   //shuffling array
 ;*    - unsigned char t_permShiftRows  [16];   //temporary array
