@@ -36,13 +36,15 @@ iof SOSSE still contain the original comments.
 ### Cautionary Notes 
 
 For efficiency reasons, the assembly code of AES Version1 assumes that the global variable ``maskedSbox`` has an address correctly aligned on 
-a memory block of 256 bytes. If the compilation is done with **recent avr-gcc** (tested on 4.8 and 5.4), the correct alignment is 
-forced by replacing the declaration of ``maskedSbox`` in file ``aesTables.h`` by:
+a memory block of 256 bytes.
 
-    __attribute__((aligned(256))) UCHAR maskedSbox [AESCARDGF256];
+Unfortunately, with the tested **avr-gcc** version 5.4.0, the ``__attribute__((aligned(256)))`` does not
+optimize the variables placement in SRAM resulting in a possible overflow (due to the very constrained 544 bytes of SRAM in the
+ATMega8515).
 
-If you use older avr-gcc, you can always force this alignment using a zero padding through a crafted global variable declared before maskedSbox:
-the addresses and the proper alignment can be checked using **objdump** on the produced ELF binary.
+This inclined us to force this alignment using a zero padding through a crafted global variable declared before maskedSbox:
+the addresses and the proper alignment can be checked using **avr-objdump** on the produced ELF binary. If you use
+versions of **avr-gcc** different from 5.4.0, please check and adapt this zero padding.
 
 ## Licenses
 SOSSE source codes are released under GPL v2 License. Our specific source codes (for aesv1 and aesv2) are 
