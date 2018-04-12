@@ -46,6 +46,37 @@ This inclined us to force this alignment using a zero padding through a crafted 
 the addresses and the proper alignment can be checked using **avr-objdump** on the produced ELF binary. If you use
 versions of **avr-gcc** different from 5.4.0, please check and adapt this zero padding.
 
+### Using the internal trigger
+
+In order to make acquisitions easier, we have implemented a trigger on the ISO7816-2 pin
+C4 (see the figure below). This pin is unused by the ISO7816-3 layer, and since it is connected to an internal
+pin of the ATMega8515, we can use it without perturbing the APDU communication with a reader.
+
+The pin C4 is set high before executing the AES, and set low after its execution. You can play around with the
+``trig_high()`` and ``trig_low()`` functions calls inside the AES (it is safe to call them from C and assembly).
+
+```
+      -------------+------------- 
+     |   C1        |         C5  | 
+     |             |             | 
+     +-------\     |     /-------+ 
+     |   C2   +----+    +    C6  | 
+     |        |         |        | 
+     +--------|         |--------+ 
+     |   C3   |         |    C7  | 
+     |        +----+----+        | 
+     +-------/     |     \-------+ 
+     |   C4=TRIG   |         C8  | 
+     |             |             | 
+      -------------+------------- 
+```
+
+You can activate the trigger when compiling the source code using the ``WITH_AES_TRIG`` toggle:
+
+```
+$ CFLAGS="-DWITH_AES_TRIG" make
+```
+
 ## Licenses
 SOSSE source codes are released under GPL v2 License. Our specific source codes (for aesv1 and aesv2) are 
 released under the BSD License. See the LICENSE file in each source folder for more information. 

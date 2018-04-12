@@ -100,7 +100,13 @@ int main( void )
 				cmd_get_mask();
 				break;
 			case INS_AES128_ENC:
+#ifdef WITH_AES_TRIG
+				trig_high();
+#endif /* WITH_AES_TRIG */
 				cmd_aes128_enc();
+#ifdef WITH_AES_TRIG
+				trig_low();
+#endif /* WITH_AES_TRIG */
 				break;
 			case INS_GET_OUTPUT:
 				cmd_get_output();

@@ -14,7 +14,7 @@ AS=avr-as
 OBJCOPY=avr-objcopy
 SIZE=avr-size
 
-CFLAGS=-Wall -O0 -mcall-prologues
+CFLAGS+=-Wall -O0 -mcall-prologues
 ASFLAGS=-Wall
 
 DATE=`date +'%d%m%y-%H%M%S'`
