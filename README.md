@@ -2,6 +2,8 @@
 
 **Authors:** Ryad Benadjila, Victor Lomné, Emmanuel Prouff, Thomas Roche
 
+This work is linked to the H2020 funded project [REASSURE](http://reassure.eu/).
+
 ## Introduction
 
 The members of ANSSI's laboratory of embedded security has developed two versions of AES128 for ATMega8515 device.
