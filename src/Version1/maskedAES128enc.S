@@ -943,9 +943,8 @@ SWAP r19
 ANDI r19, 0x0F
 LDI  r26,lo8(permIndices)              ; X = #permIndices
 LDI  r27,hi8(permIndices)
-LDI  r30,lo8(permGFSixteen)            ; Z = #permGFSixteen
-LDI  r31,hi8(permGFSixteen)
-MOVW r20,r30                           ; r21||r20 = #permGFSixteen
+LDI  r20,lo8(permGFSixteen)            ; r21||r20 = #permGFSixteen
+LDI  r21,hi8(permGFSixteen)
 
 ; initialize the index loop in r24
 LDI r23, 0x0f			; r23 = x
