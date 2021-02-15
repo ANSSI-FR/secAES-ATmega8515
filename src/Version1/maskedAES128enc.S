@@ -883,7 +883,7 @@ RET
 addRoundKey:
 ; add the AES round key in a random order specified by permIndices
 ; REQUIRE: sub-functions roundKeysDerivation and buildIndicesPermutation must have been runned prior this call
-; X, Y, Z, r16, r17, r18, , r19, r20, r21, r22, r23, r24 are modified
+; X, Y, Z, r16, r17, r18, r19, r20, r21, r22, r23, r24 are modified
 ; perf: 302 cycles
 
 ;add the offset to address of "arrayTempKeys"
@@ -1107,7 +1107,7 @@ ADC  r29, r0
 LD   r16, X                     ; r16 = input[i]
 LD   r17, Y                     ; r17 = masksState[i]
 EOR  r16, r17                   ; r16 = input[i] + masksState[i]
-ST   X, r16                     ; maskedState[i] = input[i] + masksState[i]
+ST   X, r16                     ; input[i] = r16 = input[i] + masksState[i]
 DEC  r19
 DEC  r18                        ; i--
 BRNE loop_loadAndMaskInput
