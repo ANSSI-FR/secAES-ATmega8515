@@ -29,7 +29,7 @@
 ;*                                                                           
 ;*---------------------------------------------------------------------------
 ;* the inputs "message", "key" and "mask" are assumed to be stored in global 
-;*            variables, "input", "key" and "mask" respectively.
+;*            variables, "input", "secret" and "mask" respectively.
 ;* the output is directly stored in the global variable "input"             
 ;*
 ;* arrays are defined in "aesTables.h" for temporary storing of intermediate 
@@ -927,7 +927,7 @@ buildIndicesPermutation:
 ; build a random permutation permIndices over GF(16) from the fixed permutation permGFSixteen and the two first masks of table mask
 ; Let F = permIndices, G = permGFSixteen, m1||m0 = mask[0] and m3||m2 = mask[1]
 ; F(x) = G(G(G(G(x^m0)^m1)^m2)^m3) 
-; NOTE: r16, r17, r18, r19, r20, r21, r22, , r23, r26, r27, r30, r31
+; NOTE: r16, r17, r18, r19, r20, r21, r22, r23, r26, r27, r30, r31
 ; COMPLEXITY: 604 cycles
 LDI  r26,lo8(mask)
 LDI  r27,hi8(mask)
@@ -955,27 +955,27 @@ CLR r2                  ; to deal with carry propagation
 ; BEGIN compute MaskedSbox(x) = Sbox(x+r0)+r1 for very x
 permIndicesLoop:
 MOV r22,r23
-EOR r22,r16                             ; r22 = x + m0
+EOR r22,r16                             ; r22 = x ^ m0
 MOVW r30,r20                            ; Z = #G
 ADD r30,r22
 ADC r31,r2                              ; Z = #(G(r22))
-LPM r22,Z                               ; r22 = G(x + m0)
-EOR r22,r17                             ; r22 = G(x + m0) ^ m1 
+LPM r22,Z                               ; r22 = G(x ^ m0)
+EOR r22,r17                             ; r22 = G(x ^ m0) ^ m1 
 MOVW r30,r20                            ; Z = #G
 ADD r30,r22
 ADC r31,r2                              ; Z = #(G(r22))
-LPM r22,Z                               ; r22 = G(G(x + m0) ^ m1)
-EOR r22,r18                             ; r22 = G(G(x + m0) ^ m1) ^ m2
+LPM r22,Z                               ; r22 = G(G(x ^ m0) ^ m1)
+EOR r22,r18                             ; r22 = G(G(x ^ m0) ^ m1) ^ m2
 MOVW r30,r20                            ; Z = #G
 ADD r30,r22
 ADC r31,r2                              ; Z = #(G(r22))
-LPM r22,Z                               ; r22 = G(G(G(x + m0) ^ m1) ^ m2)
-EOR r22,r19                             ; r22 = G(G(G(x + m0) ^ m1) ^ m2) ^ m3
+LPM r22,Z                               ; r22 = G(G(G(x ^ m0) ^ m1) ^ m2)
+EOR r22,r19                             ; r22 = G(G(G(x ^ m0) ^ m1) ^ m2) ^ m3
 MOVW r30,r20                            ; Z = #G
 ADD r30,r22
 ADC r31,r2                              ; Z = #(G(r22))
-LPM r22,Z                               ; r22 = G(G(G(G(x + m0) ^ m1) ^ m2) ^ m3)
-ST X+,r22                               ; X <- G(G(G(G(x + m0) ^ m1) ^ m2) ^ m3) and X++
+LPM r22,Z                               ; r22 = G(G(G(G(x ^ m0) ^ m1) ^ m2) ^ m3)
+ST X+,r22                               ; X <- G(G(G(G(x ^ m0) ^ m1) ^ m2) ^ m3) and X++
 DEC r23                                 ; decrement x
 DEC r24                                 ; decrement loop index
 BRNE permIndicesLoop                    ; loop until r24 = 0
@@ -1123,10 +1123,10 @@ RET
 ;****************************************************************************************************
 asm_maskedAES128enc:
 ; main function asm_maskedAES128enc
-; INPUT: 3 arguments stored in global variables "input", "key", "masks"
+; INPUT: 3 arguments stored in global variables "input", "secret", "masks"
 ; OUTPUT: the ciphertext is stored in "input"
 ; NOTE: all arrays are 16 bytes long except masks which contains 18 bytes
-; NOTE: the key is not overwritten, the input is.
+; NOTE: the secret is not overwritten, the input is.
 ; COMPLEXITY: 38 037 cycles
 
 ;--------------------------------------------------
